@@ -1,35 +1,33 @@
-// js/script.js
+// js/script.js (統合・修正版)
 
 document.addEventListener('DOMContentLoaded', () => {
     console.log('Liminos Studio Dev ホームページがロードされました。');
 
     // ===========================================
-    // 共通要素の定義 (DOMContentLoadedスコープ内)
+    // 共通要素の定義
     // ===========================================
     const header = document.getElementById('main-header');
-    // HTMLのプロジェクトグリッド要素を取得
-    const projectGrid = document.querySelector('.project-grid'); 
-    // CSSのテーマ変数（--bg-dark）に対応するため、変数を一時的に定義 (CSS側で--bg-mainを使用しているため、ここは調整が必要です)
-    const cssBgDark = '#1f2937'; 
+    const projectGrid = document.querySelector('.project-grid');
+    const themeToggleButton = document.getElementById('theme-toggle'); 
+    const langButtons = document.querySelectorAll('.lang-btn');
+    
+    // 言語切り替え用の変数
+    const initialLang = localStorage.getItem('lang') || 'ja';
+    let translations = {};
 
 
-    // 1. スクロール時のヘッダーの変化
+    // 1. スクロール時のヘッダーの変化 (クラス切り替え方式に修正)
     if (header) {
         window.addEventListener('scroll', () => {
             if (window.scrollY > 50) {
-                // スクロールでヘッダーを濃くする (半透明の濃い色)
-                header.style.backgroundColor = 'rgba(31, 41, 55, 0.95)'; 
-                header.style.boxShadow = '0 2px 5px rgba(0, 0, 0, 0.5)';
+                header.classList.add('scrolled'); 
             } else {
-                // スクロールが戻ったときにCSS変数(--bg-dark)が持つ値に戻す
-                // 厳密には getComputedStyle を使うべきですが、ここでは簡易的にベタ打ち、またはCSS変数名に合わせる
-                header.style.backgroundColor = 'var(--bg-main)'; 
-                header.style.boxShadow = 'none';
+                header.classList.remove('scrolled');
             }
         });
     }
 
-    // 2. プロジェクトデータの動的読み込みと表示
+    // 2. プロジェクトデータの動的読み込みと表示 (変更なし)
     const loadProjects = async () => {
         if (!projectGrid) return;
 
@@ -70,10 +68,7 @@ document.addEventListener('DOMContentLoaded', () => {
     };
 
 
-    // 3. ダークモード切り替えの実装
-    const themeToggleButton = document.getElementById('theme-toggle'); 
-    
-    // 初期テーマの設定
+    // 3. ダークモード切り替えの実装 (変更なし)
     const currentTheme = localStorage.getItem('theme') || 'dark';
     document.body.setAttribute('data-theme', currentTheme);
 
@@ -89,12 +84,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
 
-    // 4. 言語切り替えの実装
-    const langButtons = document.querySelectorAll('.lang-btn');
-    const initialLang = localStorage.getItem('lang') || 'ja';
-    let translations = {};
-
-    // 翻訳データを取得する関数
+    // 4. 言語切り替えの実装 (変更なし)
     const fetchTranslations = async (lang) => {
         try {
             const response = await fetch(`./assets/i18n/${lang}.json`);
@@ -109,7 +99,6 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     };
 
-    // DOM要素を更新する関数
     const translatePage = (lang, data) => {
         document.querySelectorAll('[data-i18n]').forEach(element => {
             const key = element.getAttribute('data-i18n');
@@ -118,7 +107,6 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
 
-        // ボタンのアクティブ状態を更新
         langButtons.forEach(btn => {
             btn.classList.remove('active');
             if (btn.getAttribute('data-lang') === lang) {
@@ -128,12 +116,10 @@ document.addEventListener('DOMContentLoaded', () => {
         localStorage.setItem('lang', lang);
     };
 
-    // 言語切り替えボタンのイベントリスナー設定
     langButtons.forEach(button => {
         button.addEventListener('click', async () => {
             const newLang = button.getAttribute('data-lang');
             
-            // データを取得し、ページを翻訳
             translations = await fetchTranslations(newLang);
             if (Object.keys(translations).length > 0) {
                 translatePage(newLang, translations);
@@ -141,7 +127,6 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    // 初期ロード時の翻訳実行
     const initializeLanguage = async () => {
         translations = await fetchTranslations(initialLang);
         if (Object.keys(translations).length > 0) {
@@ -153,9 +138,6 @@ document.addEventListener('DOMContentLoaded', () => {
     // 実行ロジック
     // ===========================================
     
-    // プロジェクトの読み込み
     loadProjects();
-    
-    // 言語の初期化
     initializeLanguage(); 
 });
