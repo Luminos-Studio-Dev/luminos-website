@@ -1,11 +1,71 @@
-<section id="contact-form" class="section">
-    <div class="container">
-        <h3>お問い合わせ</h3>
-        <form action="[フォーム送信先URL]" method="POST" class="contact-form">
-            <label for="name">お名前:</label>
-            <input type="text" id="name" name="name" required>
-            
-            <button type="submit" class="btn-primary">メッセージを送信</button>
-        </form>
-    </div>
-</section>
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Liminos Studio Dev - お問い合わせ</title>
+    
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body data-theme="dark">
+    
+    <header id="main-header">
+        <div class="container">
+            <h1 class="logo">Liminos Studio Dev</h1>
+            <nav>
+                <ul>
+                    <li><a href="index.html#about">私たちについて</a></li>
+                    <li><a href="members.html">メンバー紹介</a></li>
+                    <li><a href="index.html#projects">プロジェクト</a></li>
+                    <li><a href="#">コンタクト</a></li>
+                </ul>
+            </nav>
+            <button id="theme-toggle" class="nav-btn">☀️</button> 
+        </div>
+    </header>
+
+    <section id="contact" class="section">
+        <div class="container">
+            <h3>✉️ お問い合わせ</h3>
+            <p class="text-center">プロジェクトに関するご相談、技術的な質問、採用情報など、お気軽にお問い合わせください。</p>
+
+            <div class="contact-area">
+                <form action="YOUR_FORM_SUBMISSION_ENDPOINT" method="POST" class="contact-form">
+                    
+                    <div class="form-group">
+                        <label for="name">お名前 / ハンドルネーム <span class="required">*</span></label>
+                        <input type="text" id="name" name="name" required placeholder="Liminos Dev太郎">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="email">メールアドレス <span class="required">*</span></label>
+                        <input type="email" id="email" name="email" required placeholder="contact@example.com">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="subject">件名</label>
+                        <input type="text" id="subject" name="subject" placeholder="Museboardに関するフィードバック">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="message">お問い合わせ内容 <span class="required">*</span></label>
+                        <textarea id="message" name="message" rows="8" required placeholder="具体的なご相談内容をご記入ください。"></textarea>
+                    </div>
+                    
+                    <button type="submit" class="btn-primary form-submit-btn">メッセージを送信</button>
+                    
+                    <p class="form-note">確認後、折り返しご連絡いたします。</p>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <footer id="main-footer">
+        <div class="container">
+            <p>&copy; 2025 Liminos Studio Dev. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="js/script.js"></script>
+</body>
+</html>
