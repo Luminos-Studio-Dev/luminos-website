@@ -16,13 +16,46 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-    // 2. プロジェクトデータの動的読み込み（将来の拡張用）
-    const loadProjects = () => {
-        // ここに /api/projects からデータを取得し、
-        // .project-grid に動的にHTML要素を追加するロジックを実装します。
-        // 例: fetch('/api/projects').then(res => res.json()).then(data => { ... });
-        
-        console.log('（将来的にプロジェクトデータをAPIから読み込みます）');
+    // 2. プロジェクトデータの動的読み込みと表示 (★ ここを実装します)
+    const loadProjects = async () => {
+        if (!projectGrid) return;
+
+        try {
+            // JSONファイルをフェッチ
+            const response = await fetch('assets/projects.json');
+            
+            if (!response.ok) {
+                throw new Error('プロジェクトデータの読み込みに失敗しました。');
+            }
+            
+            const projects = await response.json();
+            
+            // 既存のコンテンツ（サンプルのカード）をクリア
+            projectGrid.innerHTML = ''; 
+
+            projects.forEach(project => {
+                const card = document.createElement('article');
+                card.className = 'project-card';
+                
+                // プロジェクトカードのHTMLを生成
+                card.innerHTML = `
+                    <div class="card-image" style="background-image: url('${project.imageUrl}');"></div>
+                    <h4>${project.title}</h4>
+                    <p>${project.description}</p>
+                    <div class="card-footer">
+                        <span class="tag">${project.category}</span>
+                        <span class="status status-${project.status.toLowerCase().replace(/\s/g, '-')}" title="プロジェクトの状態">${project.status}</span>
+                    </div>
+                    ${project.link ? `<a href="${project.link}" target="_blank" class="card-link">詳細を見る &rarr;</a>` : ''}
+                `;
+                
+                projectGrid.appendChild(card);
+            });
+
+        } catch (error) {
+            console.error('プロジェクトの読み込みエラー:', error);
+            projectGrid.innerHTML = `<p class="error-message">プロジェクト情報を読み込めませんでした。管理者にお問い合わせください。</p>`;
+        }
     };
 
     // ページの読み込み完了時に実行
