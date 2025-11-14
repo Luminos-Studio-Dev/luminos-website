@@ -14,30 +14,34 @@
             <h1 class="logo">Liminos Studio Dev</h1>
             <nav>
                 <ul>
-                    <li><a href="#about">私たちについて</a></li>
-                    <li><a href="#projects">プロジェクト</a></li>
-                    <li><a href="#ideas">アイデアボード</a></li>
-                    <li><a href="#contact">コンタクト</a></li>
+                    <li><a href="#about" data-i18n="header_about">私たちについて</a></li>
+                    <li><a href="#projects" data-i18n="header_projects">プロジェクト</a></li>
+                    <li><a href="#ideas" data-i18n="header_ideas">アイデアボード</a></li>
+                    <li><a href="#contact" data-i18n="header_contact">コンタクト</a></li>
                 </ul>
             </nav>
+            <div class="lang-switcher">
+            <button id="lang-ja" data-lang="ja" class="nav-btn lang-btn active">JA</button>
+            <button id="lang-en" data-lang="en" class="nav-btn lang-btn">EN</button>
+        </div>
             <button id="theme-toggle" class="nav-btn">☀️</button>
         </div>
     </header>
 
     <section id="hero" class="section">
         <div class="container">
-            <h2>技術とアイデアで世界を照らす</h2>
-            <p>Webアプリ開発、ゲーム、Discord Bot。私たちの創造力には限界がありません。</p>
-            <a href="#projects" class="btn-primary">プロジェクトを見る</a>
+            <h2 data-i18n="hero_title">技術とアイデアで世界を照らす</h2>
+            <p data-i18n="hero_tagline">Webアプリ開発、ゲーム、Discord Bot。私たちの創造力には限界がありません。</p>
+            <a href="#projects" class="btn-primary" data-i18n="hero_button">プロジェクトを見る</a>
         </div>
     </section>
 
     <section id="about" class="section">
         <div class="container">
-            <h3>Who We Are</h3>
-            <p>Liminos Studio Dev は、技術的な知識とユニークなアイデアを組み合わせ、デジタル体験を創造する開発チームです。</p>
+            <h3 data-i18n="about_heading">Who We Are</h3>
+            <p data-i18n="about_text">Liminos Studio Dev は、技術的な知識とユニークなアイデアを組み合わせ、デジタル体験を創造する開発チームです。</p>
             <div class="team-focus">
-                <h4>私たちの主要な活動分野:</h4>
+                <h4 data-i18n="focus_heading">私たちの主要な活動分野:</h4>
                 <ul>
                     <li>Game Development (Minecraft/Hypixel, Osu!)</li>
                     <li>Discord Bot / サーバー自動化</li>
@@ -49,7 +53,7 @@
 
     <section id="projects" class="section bg-dark">
         <div class="container">
-            <h3>Latest Projects</h3>
+            <h3 data-i18n="project_heading">Latest Projects</h3>
             <div class="project-grid">
                 <article class="project-card">
                     <h4>Museboard (Webアプリ)</h4>
@@ -67,7 +71,7 @@
 
     <footer id="main-footer">
         <div class="container">
-            <p>&copy; 2025 Liminos Studio Dev. All rights reserved.</p>
+            <p data-i18n="footer_copy">&copy; 2025 Liminos Studio Dev. All rights reserved.</p>
         </div>
     </footer>
 
