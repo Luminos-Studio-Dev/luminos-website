@@ -75,6 +75,13 @@ document.addEventListener('DOMContentLoaded', () => {
             themeToggleButton.textContent = newTheme === 'dark' ? '☀️' : '🌙';
         });
     }
+
+    // 4. 言語切り替えの実装
+    const setLanguage = (lang) => {
+        // 例: すべての要素の data-i18n 属性を検索し、対応するJSONキーでテキストを更新するロジック
+        console.log(`言語を ${lang} に切り替えました。`);
+        // localStorage.setItem('lang', lang); 
+    };
     
     // ページの読み込み完了時に実行
     loadProjects();
