@@ -58,6 +58,24 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     };
 
+    // 3. ダークモード切り替えの実装
+    const themeToggleButton = document.getElementById('theme-toggle'); // HTMLにボタンを追加してください
+    
+    // 初期テーマの設定 (LocalStorageから取得、なければダークモード)
+    const currentTheme = localStorage.getItem('theme') || 'dark';
+    document.body.setAttribute('data-theme', currentTheme);
+
+    if (themeToggleButton) {
+        themeToggleButton.textContent = currentTheme === 'dark' ? '☀️' : '🌙'; // アイコン表示
+        
+        themeToggleButton.addEventListener('click', () => {
+            const newTheme = document.body.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+            document.body.setAttribute('data-theme', newTheme);
+            localStorage.setItem('theme', newTheme);
+            themeToggleButton.textContent = newTheme === 'dark' ? '☀️' : '🌙';
+        });
+    }
+    
     // ページの読み込み完了時に実行
     loadProjects();
 });
