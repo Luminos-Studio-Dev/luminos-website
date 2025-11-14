@@ -27,12 +27,3 @@
 
 ---
 
-## 📦 ローカルでのセットアップ
-
-このプロジェクトは、特別なビルドツールを必要としません。ローカル環境で表示・開発するには、以下の手順に従ってください。
-
-### 1. リポジトリのクローン
-
-```bash
-git clone [あなたのリポジトリURL] liminos-studio-homepage
-cd liminos-studio-homepage
